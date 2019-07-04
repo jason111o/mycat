@@ -1,3 +1,9 @@
+// Created by Jason Pippin
+/* This is my version of the linux cat command during the course of
+learning the c language in the cs50 Introduction to Computer Science. */
+// version 1.1
+// added in line numbering and color prompt scheme for visual asthetics
+
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -21,17 +27,38 @@ int main(int argc, char *argv[])
         }
 
         // Print file name
-        printf("\nFILE: %s\n", argv[i]);
+        printf("\n\033[01;34mFILE: %s\n", argv[i]);
         // Assign first char before starting while loop
         char ch = fgetc(arg);
-        while (ch != EOF)
+        // int for line counting
+        int line_num = 0;
+        // Print first line number
+        printf("\033[01;33m%i\033[01;36m  ", line_num);
+        while (ch)
         {
-            putchar(ch);
-            ch = fgetc(arg);
+            if (ch == EOF)
+            {
+                break;
+            }
+            else if ( ch == '\n')
+            {
+                line_num++;
+                putchar(ch);
+                printf("\033[01;33m%d\033[01;36m  ", line_num);
+                ch = fgetc(arg);
+            }
+            else
+            {
+                putchar(ch);
+                ch = fgetc(arg);
+            }
         }
 
         // Close arg
         fclose(arg);
+        
+        // End color scheme
+        printf("\033[0m");
     }
 
     // Newline for asthetics
