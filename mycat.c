@@ -5,7 +5,7 @@ learning the c language in the cs50 Introduction to Computer Science. */
 // menu or program version... -h -v
 // Will now iterate through all argumets even if some were not found
 // and display what was found yet print out that some arguments were not
-// found - as of patch
+// found
 
 #include <stdio.h>
 #include <string.h>
