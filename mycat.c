@@ -3,12 +3,15 @@
 learning the c language in the cs50 Introduction to Computer Science. */
 // Updates: You can now pass in the first arguments to display the help
 // menu or program version... -h -v
+// Will now iterate through all argumets even if some were not found
+// and display what was found yet print out that some arguments were not
+// found - as of patch
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-#define VERSION "\n Version 1.3\n\n"
+#define VERSION "\n Version 1.4\n\n"
 
 int main(int argc, char *argv[])
 {
@@ -55,7 +58,11 @@ int main(int argc, char *argv[])
         stream = fopen(argv[i], "r");
         if (!stream)
         {
-            fprintf(stderr, "\n Unable to open \"%s\"\n\n", argv[1]);
+            fprintf(stderr, "\033[01;31m\n Unable to open\033[0m \"%s\"\n\n", argv[i]);
+            if (argc > i)
+            {
+                continue;
+            }
             return 2;
         }
         
